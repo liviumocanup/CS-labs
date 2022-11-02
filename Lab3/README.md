@@ -34,3 +34,95 @@
 ### RSA
 
 RSA is an asymmetric cipher that uses the fact that it is easy to find the prime factors of a large number, but it is difficult to find the prime factors of a product of two large prime numbers. It uses two keys, one public and one private. The public key is used to encrypt the message and the private key is used to decrypt the message.
+**Key generation steps:**
+1. Generate two large prime numbers `p` and `q`.
+```go
+    public RSAKey generateKeys(int numberOfBits){
+        p = BigInteger.probablePrime(numberOfBits, new Random());
+        q = BigInteger.probablePrime(numberOfBits, new Random());
+        ...
+    }
+```
+
+2. Compute `n = p * q`.
+```go
+    public RSAKey generateKeys(int numberOfBits){
+        ...
+        n = p.multiply(q);
+        ...
+    }
+```
+
+3. Compute `phi(n) = (p - 1) * (q - 1)`.
+```go
+    public RSAKey generateKeys(int numberOfBits){
+        ...
+        phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
+        ...
+    }
+```
+
+4. Choose an integer `e` such that `1 < e < phi(n)` and `gcd(e, phi(n)) = 1`. This is the public key.
+```go
+    public RSAKey generateKeys(int numberOfBits){
+        ...
+        e = generateE(phi);
+        ...
+    }
+    
+    public static BigInteger generateE(BigInteger phi) {
+        ...
+        do {
+            e = new BigInteger(1024, rand);
+            while (e.min(phi).equals(phi)) {
+                e = new BigInteger(1024, rand);
+            }
+        } while (!gcd(e, phi).equals(BigInteger.ONE));
+        ...
+    }
+```
+
+5. Compute `d` such that `d * e = 1 mod phi(n)`. This is the private key.
+```go
+    public RSAKey generateKeys(int numberOfBits){
+        ...
+        d = extendedEuclidean(e, phi)[1];
+        ...
+    }
+    
+    public static BigInteger[] extendedEuclidean(BigInteger a, BigInteger b) {
+        if (b.equals(BigInteger.ZERO))
+            return new BigInteger[]{a, BigInteger.ONE, BigInteger.ZERO};
+
+        BigInteger[] values = extendedEuclidean(b, a.mod(b));
+        BigInteger d = values[0];
+        BigInteger p = values[2];
+        BigInteger q = values[1].subtract(a.divide(b).multiply(values[2]));
+
+        return new BigInteger[]{d, p, q};
+    }
+```
+
+**Encryption:**
+
+To compute `encrypted` from plain text `message` we use: `message ^ e mod n`. (when generating keys, rsaKey.publicKey got set as e)
+```go
+    public byte[] encrypt(String message, RSAKey rsaKey) {
+        BigInteger cipherMessage = new BigInteger(message.getBytes());
+        return cipherMessage.modPow(rsaKey.getPublicKey(), rsaKey.getN()).toByteArray();
+    }
+```
+
+**Decryption:**
+
+To compute `decrypted` from encrypted text `message` we use: `decryptedMessage ^ d mod n`. (when generating keys, rsaKey.privateKey got set as d)
+```go
+    public String decrypt(byte[] message, RSAKey rsaKey) {
+        BigInteger decryptedMessage = new BigInteger(message).modPow(rsaKey.getPrivateKey(), rsaKey.getN());
+        return new String(decryptedMessage.toByteArray());
+    }
+```
+
+## Conclusion:
+
+After completing this lab assignment, I now understand how to use and implement an asymmetric cipher. An extremely common asymmetric cipher used for both data encryption and decryption is called RSA. Although it might be slow and is not ideal for handling big volumes of data, it is quite secure.
