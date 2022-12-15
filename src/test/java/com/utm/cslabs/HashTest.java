@@ -1,7 +1,7 @@
 package com.utm.cslabs;
 
 import com.utm.cslabs.hash.PersistUser;
-import com.utm.cslabs.hash.User;
+import com.utm.cslabs.hash.UserHash;
 import com.utm.cslabs.hash.UsersRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ public class HashTest {
 
     private PersistUser persistUser;
 
-    private User user, user1;
+    private UserHash user, user1;
 
     @BeforeEach
     void setUp() {
@@ -26,10 +26,10 @@ public class HashTest {
         String password = "VerySafePassword";
 
         String hashPass = BCrypt.hashpw(password, BCrypt.gensalt());
-        user = new User().setPassword(hashPass);
+        user = new UserHash().setPassword(hashPass);
 
         String hashPass1 = BCrypt.hashpw(password, BCrypt.gensalt());
-        user1 = new User().setPassword(hashPass1);
+        user1 = new UserHash().setPassword(hashPass1);
     }
 
     @Test
