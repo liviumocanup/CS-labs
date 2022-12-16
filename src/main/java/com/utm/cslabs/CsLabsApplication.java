@@ -21,6 +21,7 @@ public class CsLabsApplication {
     public static void main(String[] args) {
         SpringApplication.run(CsLabsApplication.class, args);
 
+        /*
         //Lab 1 test
         System.out.println("=====Classic Ciphers Test=====");
         classicTest();
@@ -43,6 +44,7 @@ public class CsLabsApplication {
         System.out.println("=====Hashing Message Test=====");
         testHash();
         System.out.println("------------------------------\n\n");
+        */
     }
 
     private static void classicTest() {

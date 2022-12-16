@@ -17,8 +17,8 @@ public class PersistUser {
         String password = "VerySafePassword";
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        User savedUser = usersRepository.save(
-                new User().setPassword(hashedPassword)
+        UserHash savedUser = usersRepository.save(
+                new UserHash().setPassword(hashedPassword)
         );
 
         System.out.println(("Hashed password stored: "+savedUser.getPassword()));

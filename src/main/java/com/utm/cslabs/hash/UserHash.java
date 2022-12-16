@@ -17,8 +17,8 @@ import java.math.BigInteger;
 @Accessors(chain = true)
 @Getter
 @Setter
-@Table(name = "users")
-public class User {
+@Table(name = "usersHash")
+public class UserHash {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
