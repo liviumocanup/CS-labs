@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "440bf77e-896e-4cb8-b196-a4a41ceff29d",
+		"name": "cs-5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18071230"
+	},
+	"item": [
+		{
+			"name": "Classic User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"classic_user\",\r\n    \"email\": \"classicuser@mail.com\",\r\n    \"password\": \"Simple@pass2\",\r\n    \"role\": [\r\n        \"classic\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"classic_user\",\r\n    \"password\": \"Simple@pass2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MFA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/auth/confirm-with-mfa?code=542451",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"confirm-with-mfa"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "542451"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Asymmetric User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"asymmetric_user\",\r\n    \"email\": \"asymmetricuser@mail.com\",\r\n    \"password\": \"Simple@pass2\",\r\n    \"role\": [\r\n        \"asymmetric\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"asymmetric_user\",\r\n    \"password\": \"Simple@pass2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MFA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/auth/confirm-with-mfa?code=659380",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"confirm-with-mfa"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "659380"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Caesar Cipher",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjbGFzc2ljX3VzZXIiLCJpYXQiOjE2NzExNDgwNzYsImV4cCI6MTY3MTIzNDQ3Nn0.pADqbCjukHJlKQ2TQDtGUNkZQM4RNV4mf0Co85FssA4slwnJ3ml7LfmVeLKjzAIOfT6vWAzkO3ZEkqU6VLIcbA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/cipher/caesar?message=\"Hello world\"&shift=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cipher",
+						"caesar"
+					],
+					"query": [
+						{
+							"key": "message",
+							"value": "\"Hello world\""
+						},
+						{
+							"key": "shift",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rsa Cipher",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjbGFzc2ljX3VzZXIiLCJpYXQiOjE2NzExNDgwNzYsImV4cCI6MTY3MTIzNDQ3Nn0.pADqbCjukHJlKQ2TQDtGUNkZQM4RNV4mf0Co85FssA4slwnJ3ml7LfmVeLKjzAIOfT6vWAzkO3ZEkqU6VLIcbA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/cipher/rsa?message=\"Hello world\"",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cipher",
+						"rsa"
+					],
+					"query": [
+						{
+							"key": "message",
+							"value": "\"Hello world\""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
